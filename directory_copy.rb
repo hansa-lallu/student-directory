@@ -36,9 +36,22 @@ def print_header
 end
 
 def print(students)
-  students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+  students.each.with_index(1) do |student, index|
+    puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
+end
+
+def print_students_by_letter(students, letter)
+  selected_students = []
+
+    students.each do |student|
+      puts student[:name][0]
+      if student[:name][0] === letter.downcase
+        selected_students.push(student)
+      end
+    end
+
+  print(selected_students)
 end
 
 def print_footer(names)
@@ -47,5 +60,5 @@ end
 
 students = input_students
 print_header
-print(students)
+print_students_by_letter(students, "c")
 print_footer(students)
