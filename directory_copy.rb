@@ -58,7 +58,16 @@ def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
 
+def less_than(students)
+  students.each do |student|
+    if student[:name].length < 12
+      puts student 
+    end 
+  end 
+end
+
+
 students = input_students
 print_header
-print_students_by_letter(students, "c")
+less_than(students)
 print_footer(students)
