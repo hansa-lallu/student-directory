@@ -35,10 +35,16 @@ def print_header
   puts "-------------"
 end
 
+
 def print(students)
-  students.each.with_index(1) do |student, index|
-    puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-  end
+  count = 0
+  while count < students.length do 
+    puts "#{count + 1}. #{students[count][:name]} (#{students[count][:cohort]} cohort)"
+    count = count + 1
+  end 
+  # students.each.with_index(1) do |student, index|
+  # puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+  # end
 end
 
 def print_students_by_letter(students, letter)
@@ -67,7 +73,7 @@ def less_than(students)
 end
 
 
-students = input_students
+
 print_header
-less_than(students)
+print(students)
 print_footer(students)
