@@ -39,9 +39,10 @@ end
 def print(students)
   count = 0
   while count < students.length do 
-    puts "#{count + 1}. #{students[count][:name]} (#{students[count][:cohort]} cohort), #{students[count][:country_of_birth]}, #{students[count][:height]}."
+    puts "#{count + 1}. #{students[count][:name]} (#{students[count][:cohort]} cohort), #{students[count][:country_of_birth]}, #{students[count][:height]}.".center(100)
     count = count + 1
   end 
+  # Each loop
   # students.each.with_index(1) do |student, index|
   # puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
   # end
