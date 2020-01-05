@@ -41,7 +41,11 @@ def input_students
   while !name.empty? do
     # add the student hash to the array
     @custom_students << {name: name, cohort: cohort}
+   if @custom_students.count > 1
     puts "Now we have #{@custom_students.count} students"
+   else 
+    puts "Now we have #{@custom_students.count} student"
+   end 
     # get another name from the user
     puts "Please enter the names of the students"
     puts "To finish, just hit return three times"
@@ -97,7 +101,11 @@ def print_students_by_letter(students, letter)
 end
 
 def print_footer
+  if @custom_students.count > 1
   puts "Overall, we have #{@custom_students.count} great students"
+  else
+    puts  "Overall, we have #{@custom_students.count} great student"
+  end
 end
 
 def less_than(students)
