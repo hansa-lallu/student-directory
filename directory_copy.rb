@@ -13,16 +13,34 @@ students = [
   {name: "Norman Bates", cohort: :november, country_of_birth: "Japan", height: 183},
 ]
 
+
+def input_cohort
+months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+  puts "Enter cohort month:"
+  cohort_month = gets.chomp.downcase.to_sym
+
+  cohort_month = :november if cohort_month.empty?
+
+  until months.map(&:to_sym).include?(cohort_month)
+    puts "Please enter a valid month"
+    cohort_month = gets.chomp.downcase.to_sym
+    return cohort_month = :november if cohort_month.empty?
+  end
+  cohort_month
+end
+
+
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
 # create an empty array
   students = []
   name = gets.chomp
+  cohort = input_cohort
 # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students <<{name: name, cohort: :november}
+    students <<{name: name, cohort: cohort}
     puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
@@ -37,15 +55,16 @@ end
 
 
 def print(students)
-  count = 0
-  while count < students.length do 
-    puts "#{count + 1}. #{students[count][:name]} (#{students[count][:cohort]} cohort), #{students[count][:country_of_birth]}, #{students[count][:height]}.".center(100)
-    count = count + 1
-  end 
+  # count = 0
+  # while count < students.length do 
+  #   puts "#{count + 1}. #{students[count][:name]} (#{students[count][:cohort]} cohort), #{students[count][:country_of_birth]}, #{students[count][:height]}.".center(100)
+  #   count = count + 1
+  # end 
+  
   # Each loop
-  # students.each.with_index(1) do |student, index|
-  # puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-  # end
+  students.each.with_index(1) do |student, index|
+  puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+  end
 end
 
 def print_students_by_letter(students, letter)
@@ -76,5 +95,5 @@ end
 
 
 print_header
-print(students)
+print(input_students)
 print_footer(students)
