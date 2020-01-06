@@ -32,6 +32,10 @@ def process(selection)
   end 
 end 
 
+def add_student(name, cohort = :november)
+  @students << {name: name, cohort: cohort.to_sym}
+end 
+
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -39,7 +43,7 @@ def input_students
 # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    @students << {name: name, cohort: :november}
+    add_student(name)
    if @students.count > 1
     puts "Now we have #{@students.count} students"
    else 
@@ -49,6 +53,15 @@ def input_students
     name = STDIN.gets.chomp
   end
 end
+
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
+  file.readlines.each do |line|
+  name, cohort = line.chomp.split(',')
+   add_student(name, cohort)
+  end 
+  file.close
+end 
 
 def show_students
   print_header
@@ -87,14 +100,7 @@ def save_students
   file.close 
 end 
 
-def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
-  end 
-  file.close
-end 
+
 
 def try_load_students
   filename = ARGV.first # first argument from the command line
