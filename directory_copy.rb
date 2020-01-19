@@ -44,17 +44,13 @@ def input_students
   while !name.empty? do
     # add the student hash to the array
     add_student(name)
-   if @students.count > 1
-    puts "Now we have #{@students.count} students"
-   else 
-    puts "Now we have #{@students.count} student"
-   end 
+    print_student_count
     # get another name from the user  
     name = STDIN.gets.chomp
   end
 end
 
-def load_students(filename = "students.csv")
+def load_file(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
@@ -66,7 +62,7 @@ end
 def show_students
   print_header
   print_students_list
-  print_footer
+  print_student_count
 end 
 
 def print_header
@@ -76,16 +72,12 @@ end
 
 def print_students_list
   @students.each do |student|
-  puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
-def print_footer
-  if @students.count > 1
-  puts "Overall, we have #{@students.count} great students"
-  else
-    puts  "Overall, we have #{@students.count} great student"
-  end
+def print_student_count
+  puts "Overall, we have #{@students.count} great student#{@students.count > 1 ? "s" : null}"
 end  
 
 def save_students
@@ -100,7 +92,7 @@ def save_students
   file.close 
 end 
 
-def try_load_students
+def load_students
   filename = ARGV.first # first argument from the command line
     
   if filename.nil? # get out of the method if it isn't given
@@ -108,7 +100,7 @@ def try_load_students
   end
 
   if File.exists?(filename) # if it exists
-    load_students(filename)
+    load_file(filename)
      puts "Loaded #{@students.count} from #{filename}"
   else # if it doesn't exist
     puts "Sorry, #{filename} doesn't exist."
@@ -116,5 +108,5 @@ def try_load_students
   end
 end
 
-try_load_students
+load_students
 interactive_menu
