@@ -87,11 +87,16 @@ end
 
 def print_student_count
   puts "Overall, we have #{@students.count} great student#{@students.count > 1 ? "s" : null}"
-end  
+end
+
+def filename_input
+  puts "Please enter your filename:"
+  return gets.chomp 
+end
 
 def save_students
   # open the file for writing
-  file = File.open("students.csv" , "w")
+  file = File.open(filename_input , "w")
   # interate over the array of students 
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
@@ -105,7 +110,7 @@ def load_students
   filename = ARGV.first # first argument from the command line
     
   if filename.nil? # get out of the method if it isn't given
-    filename = 'students.csv'
+    filename = filename_input
   end
 
   if File.exists?(filename) # if it exists
