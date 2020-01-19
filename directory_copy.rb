@@ -13,19 +13,28 @@ def interactive_menu
    print_menu
    process(gets.chomp)
   end 
-end 
+end
+
+def print_feedback(action)
+  puts "You have selected #{action}"
+end
 
 def process(selection)
   case selection
   when "1"
+    print_feedback("Input Students")
     input_students
   when "2"
+    print_feedback("Show Students")
     show_students
   when "3"
+    print_feedback("Save Students")
     save_students
   when "4"
+    print_feedback("Load Students")
     load_students
   when "9"
+    print_feedback("Exit program")
     exit
   else 
     puts "I don't know what you meant, try again"
